@@ -11,11 +11,11 @@ def update_images():
     cursor = conn.cursor()
 
     updates = [
-        ("Gujarati Khandvi", "http://192.168.1.28:8000/static/images/khandvi.png"),
-        ("Chole Bhature", "http://192.168.1.28:8000/static/images/chhole_bhature.png"),
-        ("Pancakes with Maple Syrup", "http://192.168.1.28:8000/static/images/pancakes.png"),
-        ("Dhokla", "http://192.168.1.28:8000/static/images/dhokla.png"),
-        ("French Toast", "http://192.168.1.28:8000/static/images/pancakes_user.jpg")
+        ("Gujarati Khandvi", "https://cooking-ai-1.onrender.com/static/images/khandvi.png"),
+        ("Chole Bhature", "https://cooking-ai-1.onrender.com/static/images/chhole_bhature.png"),
+        ("Pancakes with Maple Syrup", "https://cooking-ai-1.onrender.com/static/images/pancakes.png"),
+        ("Dhokla", "https://cooking-ai-1.onrender.com/static/images/dhokla.png"),
+        ("French Toast", "https://cooking-ai-1.onrender.com/static/images/pancakes_user.jpg")
     ]
 
     for title, url in updates:
