@@ -21,13 +21,16 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
   bool _isPlaying = false;
   final FlutterTts flutterTts = FlutterTts();
 
-  final List<String> _steps = [
-    'Begin by preparing the base of the rich gravy. Heat a generous amount of butter in a large pan or kadai over medium heat until it melts completely and starts to bubble slightly. Add the finely chopped onions to the pan. Sauté the onions patiently for about 8 to 10 minutes, stirring frequently, until they turn a beautiful deep golden brown color. This slow caramelization is key to the flavor of the dish.',
-    'Once the onions are perfectly caramelized, it is time to build the aromatics. Add the freshly ground ginger-garlic paste into the pan. Stir it continuously and sauté for another one to two minutes until the raw, pungent smell of the garlic completely disappears and a fragrant aroma fills your kitchen.',
-    'Now, stir in the smooth tomato puree along with the ground spices: turmeric powder, red chili powder, and coriander powder. Mix everything very well. Allow this masala mixture to cook down slowly over medium-low heat. Keep stirring occasionally to prevent burning. Cook until the mixture thickens significantly and you can clearly see the oil separating and leaving the sides of the pan. This indicates the spices are fully cooked.',
-    'With the masala base ready, gently add the soft paneer cubes into the pan. Be very careful while mixing so that the paneer cubes do not break. Toss them lightly so they are evenly coated with the thick, flavorful masala on all sides. Let the paneer absorb the flavors for about 2 minutes on low heat.',
-    'Finally, for that signature restaurant-style richness, pour in the heavy cream and gently stir it through the gravy. Sprinkle a pinch of garam masala and crush some roasted kasuri methi (dried fenugreek leaves) between your palms before adding it to the pan. Simmer the entire mixture for another 5 minutes on low heat. Garnish with a little more cream and serve hot with butter naan or jeera rice. Enjoy!',
-  ];
+  List<String> get _steps {
+    final l10n = AppLocalizations.of(context)!;
+    return [
+      l10n.step1,
+      l10n.step2,
+      l10n.step3,
+      l10n.step4,
+      l10n.step5,
+    ];
+  }
 
   final List<String> _dishImages = [
     'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80',
@@ -37,6 +40,7 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
   ];
 
   List<int> _stepsWithImages = [];
+  bool _isTtsInitialized = false;
 
   @override
   void initState() {
@@ -44,23 +48,38 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
     if (widget.recipe?.imageUrl != null) {
       _dishImages[0] = widget.recipe!.imageUrl!;
     }
-    _initTts();
     _pickRandomStepsForImages();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isTtsInitialized) {
+      _initTts();
+      _isTtsInitialized = true;
+    }
   }
 
   void _pickRandomStepsForImages() {
     final random = Random();
     int numImages = 2 + random.nextInt(2); // 2 or 3 images
-    numImages = numImages.clamp(0, _steps.length);
+    numImages = numImages.clamp(0, 5);
     Set<int> selectedSteps = {};
     while (selectedSteps.length < numImages) {
-      selectedSteps.add(random.nextInt(_steps.length));
+      selectedSteps.add(random.nextInt(5));
     }
     _stepsWithImages = selectedSteps.toList();
   }
 
   void _initTts() async {
-    await flutterTts.setLanguage("en-US");
+    final locale = Localizations.localeOf(context);
+    String ttsLang = "en-US";
+    if (locale.languageCode == 'gu') {
+      ttsLang = "gu-IN";
+    } else if (locale.languageCode == 'hi') {
+      ttsLang = "hi-IN";
+    }
+    await flutterTts.setLanguage(ttsLang);
     await flutterTts.setSpeechRate(0.5); // Adjust speed
     await flutterTts.setVolume(1.0);
     await flutterTts.setPitch(1.0);
@@ -98,8 +117,9 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
         _speakCurrentStep();
       }
     } else {
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Cooking Complete! Enjoy your meal! 🎉')),
+        SnackBar(content: Text(l10n.cookingComplete)),
       );
     }
   }
@@ -117,16 +137,18 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
   }
 
   void _togglePlay() {
+    final l10n = AppLocalizations.of(context)!;
     setState(() {
       _isPlaying = !_isPlaying;
     });
     _speakCurrentStep();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(_isPlaying ? 'Cooking timer started! Speaking steps...' : 'Timer paused. Audio stopped.')),
+      SnackBar(content: Text(_isPlaying ? l10n.cookingTimerStarted : l10n.timerPaused)),
     );
   }
 
   void _showIngredientsBottomSheet() {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -145,12 +167,12 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Ingredients Required', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              Text(l10n.ingredientsRequired, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               const SizedBox(height: 16),
-              _buildIngredientItem('Paneer', '200g'),
-              _buildIngredientItem('Butter', '2 tbsp'),
-              _buildIngredientItem('Onion', '1 large'),
-              _buildIngredientItem('Tomato Puree', '1 cup'),
+              _buildIngredientItem(l10n.paneer, '200 ${l10n.g}'),
+              _buildIngredientItem(l10n.butter, '2 ${l10n.tbsp}'),
+              _buildIngredientItem(l10n.onion, '1 ${l10n.large}'),
+              _buildIngredientItem(l10n.tomatoPuree, '1 ${l10n.cup}'),
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
@@ -159,12 +181,12 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
                     final Uri url = Uri.parse('https://www.swiggy.com/instamart');
                     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
                       if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Could not launch Instamart')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.couldNotLaunchInstamart)));
                       }
                     }
                   },
                   icon: const Icon(Icons.shopping_bag),
-                  label: const Text('Buy Now on Instamart'),
+                  label: Text(l10n.buyNowInstamart),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.orange, // Instamart-like color
@@ -195,9 +217,10 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.recipe != null ? 'Cooking: ${widget.recipe!.title}' : 'Cooking Mode'),
+        title: Text(widget.recipe != null ? '${l10n.cooking} ${widget.recipe!.title}' : l10n.cookingMode),
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),
@@ -246,12 +269,12 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
                         color: Colors.blue.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.mic, color: Colors.blue, size: 20),
-                          SizedBox(width: 8),
-                          Text('Listening for "Next Step"...', style: TextStyle(color: Colors.blue)),
+                          const Icon(Icons.mic, color: Colors.blue, size: 20),
+                          const SizedBox(width: 8),
+                          Text(l10n.listeningForNextStep, style: const TextStyle(color: Colors.blue)),
                         ],
                       ),
                     ),
@@ -268,12 +291,12 @@ class _CookingStepScreenState extends State<CookingStepScreen> {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: Colors.grey[400]!),
                     ),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Advertisement', style: TextStyle(color: Colors.black54, fontSize: 12)),
-                        SizedBox(height: 8),
-                        Icon(Icons.ad_units, color: Colors.black45, size: 32),
+                        Text(l10n.advertisement, style: const TextStyle(color: Colors.black54, fontSize: 12)),
+                        const SizedBox(height: 8),
+                        const Icon(Icons.ad_units, color: Colors.black45, size: 32),
                       ],
                     ),
                   ),

@@ -243,6 +243,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cooking Time'**
   String get cookingTime;
+
+  /// No description provided for @askAiChef.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI Chef'**
+  String get askAiChef;
+
+  /// No description provided for @searchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search recipes, ingredients...'**
+  String get searchPlaceholder;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAll;
+
+  /// No description provided for @recommendedForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended for you'**
+  String get recommendedForYou;
+
+  /// No description provided for @goodMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Morning,'**
+  String get goodMorning;
+
+  /// No description provided for @goodAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Afternoon,'**
+  String get goodAfternoon;
+
+  /// No description provided for @goodEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Evening,'**
+  String get goodEvening;
+
+  /// No description provided for @breakfast.
+  ///
+  /// In en, this message translates to:
+  /// **'Breakfast'**
+  String get breakfast;
+
+  /// No description provided for @lunch.
+  ///
+  /// In en, this message translates to:
+  /// **'Lunch'**
+  String get lunch;
+
+  /// No description provided for @dinner.
+  ///
+  /// In en, this message translates to:
+  /// **'Dinner'**
+  String get dinner;
+
+  /// No description provided for @dessert.
+  ///
+  /// In en, this message translates to:
+  /// **'Dessert'**
+  String get dessert;
+
+  /// No description provided for @healthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy'**
+  String get healthy;
+
+  /// No description provided for @errorLoadingRecipes.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading recipes'**
+  String get errorLoadingRecipes;
+
+  /// No description provided for @cookingComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Cooking Complete! Enjoy your meal! 🎉'**
+  String get cookingComplete;
+
+  /// No description provided for @cookingTimerStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Cooking timer started! Speaking steps...'**
+  String get cookingTimerStarted;
+
+  /// No description provided for @timerPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Timer paused. Audio stopped.'**
+  String get timerPaused;
+
+  /// No description provided for @ingredientsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredients Required'**
+  String get ingredientsRequired;
+
+  /// No description provided for @buyNowInstamart.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy Now on Instamart'**
+  String get buyNowInstamart;
+
+  /// No description provided for @couldNotLaunchInstamart.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not launch Instamart'**
+  String get couldNotLaunchInstamart;
+
+  /// No description provided for @cookingMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Cooking Mode'**
+  String get cookingMode;
+
+  /// No description provided for @listeningForNextStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening for \"Next Step\"...'**
+  String get listeningForNextStep;
+
+  /// No description provided for @advertisement.
+  ///
+  /// In en, this message translates to:
+  /// **'Advertisement'**
+  String get advertisement;
+
+  /// No description provided for @cooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Cooking:'**
+  String get cooking;
+
+  /// No description provided for @paneer.
+  ///
+  /// In en, this message translates to:
+  /// **'Paneer'**
+  String get paneer;
+
+  /// No description provided for @butter.
+  ///
+  /// In en, this message translates to:
+  /// **'Butter'**
+  String get butter;
+
+  /// No description provided for @onion.
+  ///
+  /// In en, this message translates to:
+  /// **'Onion'**
+  String get onion;
+
+  /// No description provided for @tomatoPuree.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomato Puree'**
+  String get tomatoPuree;
+
+  /// No description provided for @g.
+  ///
+  /// In en, this message translates to:
+  /// **'g'**
+  String get g;
+
+  /// No description provided for @tbsp.
+  ///
+  /// In en, this message translates to:
+  /// **'tbsp'**
+  String get tbsp;
+
+  /// No description provided for @large.
+  ///
+  /// In en, this message translates to:
+  /// **'large'**
+  String get large;
+
+  /// No description provided for @cup.
+  ///
+  /// In en, this message translates to:
+  /// **'cup'**
+  String get cup;
+
+  /// No description provided for @step1.
+  ///
+  /// In en, this message translates to:
+  /// **'Begin by preparing the base of the rich gravy. Heat a generous amount of butter in a large pan or kadai over medium heat until it melts completely and starts to bubble slightly. Add the finely chopped onions to the pan. Sauté the onions patiently for about 8 to 10 minutes, stirring frequently, until they turn a beautiful deep golden brown color. This slow caramelization is key to the flavor of the dish.'**
+  String get step1;
+
+  /// No description provided for @step2.
+  ///
+  /// In en, this message translates to:
+  /// **'Once the onions are perfectly caramelized, it is time to build the aromatics. Add the freshly ground ginger-garlic paste into the pan. Stir it continuously and sauté for another one to two minutes until the raw, pungent smell of the garlic completely disappears and a fragrant aroma fills your kitchen.'**
+  String get step2;
+
+  /// No description provided for @step3.
+  ///
+  /// In en, this message translates to:
+  /// **'Now, stir in the smooth tomato puree along with the ground spices: turmeric powder, red chili powder, and coriander powder. Mix everything very well. Allow this masala mixture to cook down slowly over medium-low heat. Keep stirring occasionally to prevent burning. Cook until the mixture thickens significantly and you can clearly see the oil separating and leaving the sides of the pan. This indicates the spices are fully cooked.'**
+  String get step3;
+
+  /// No description provided for @step4.
+  ///
+  /// In en, this message translates to:
+  /// **'With the masala base ready, gently add the soft paneer cubes into the pan. Be very careful while mixing so that the paneer cubes do not break. Toss them lightly so they are evenly coated with the thick, flavorful masala on all sides. Let the paneer absorb the flavors for about 2 minutes on low heat.'**
+  String get step4;
+
+  /// No description provided for @step5.
+  ///
+  /// In en, this message translates to:
+  /// **'Finally, for that signature restaurant-style richness, pour in the heavy cream and gently stir it through the gravy. Sprinkle a pinch of garam masala and crush some roasted kasuri methi (dried fenugreek leaves) between your palms before adding it to the pan. Simmer the entire mixture for another 5 minutes on low heat. Garnish with a little more cream and serve hot with butter naan or jeera rice. Enjoy!'**
+  String get step5;
 }
 
 class _AppLocalizationsDelegate

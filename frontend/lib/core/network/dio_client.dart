@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.1.28:8000', // Use your computer's IP for real device testing over Wi-Fi
+      baseUrl: 'https://cooking-ai-1.onrender.com', // Live API URL
       connectTimeout: const Duration(seconds: 120),
       receiveTimeout: const Duration(seconds: 120),
       headers: {

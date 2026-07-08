@@ -4,12 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_recipe_app/core/providers/recipe_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -33,21 +35,22 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push('/ai_chef'),
         icon: const Icon(Icons.auto_awesome),
-        label: const Text('Ask AI Chef'),
+        label: Text(l10n.askAiChef),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
     );
   }
 
-  String _getGreeting() {
+  String _getGreeting(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     var hour = DateTime.now().hour;
     if (hour < 12) {
-      return 'Good Morning,';
+      return l10n.goodMorning;
     } else if (hour < 17) {
-      return 'Good Afternoon,';
+      return l10n.goodAfternoon;
     }
-    return 'Good Evening,';
+    return l10n.goodEvening;
   }
 
   Widget _buildHeader(BuildContext context) {
@@ -58,7 +61,7 @@ class HomeScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              _getGreeting(),
+              _getGreeting(context),
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
             const Text(
@@ -77,6 +80,7 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildSearchBar(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () {
         context.push('/search');
@@ -88,13 +92,13 @@ class HomeScreen extends ConsumerWidget {
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(12),
         ),
-        child: const Row(
+        child: Row(
           children: [
-            Icon(Icons.search, color: Colors.grey),
-            SizedBox(width: 12),
+            const Icon(Icons.search, color: Colors.grey),
+            const SizedBox(width: 12),
             Text(
-              'Search recipes, ingredients...',
-              style: TextStyle(color: Colors.grey, fontSize: 16),
+              l10n.searchPlaceholder,
+              style: const TextStyle(color: Colors.grey, fontSize: 16),
             ),
           ],
         ),
@@ -103,12 +107,13 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildCategoriesSection(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final categories = [
-      {'name': 'Breakfast', 'icon': Icons.breakfast_dining},
-      {'name': 'Lunch', 'icon': Icons.lunch_dining},
-      {'name': 'Dinner', 'icon': Icons.dinner_dining},
-      {'name': 'Dessert', 'icon': Icons.cake},
-      {'name': 'Healthy', 'icon': Icons.spa},
+      {'name': l10n.breakfast, 'icon': Icons.breakfast_dining},
+      {'name': l10n.lunch, 'icon': Icons.lunch_dining},
+      {'name': l10n.dinner, 'icon': Icons.dinner_dining},
+      {'name': l10n.dessert, 'icon': Icons.cake},
+      {'name': l10n.healthy, 'icon': Icons.spa},
     ];
 
     return Column(
@@ -117,15 +122,15 @@ class HomeScreen extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Categories',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              l10n.categories,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             TextButton(
               onPressed: () {
                 context.push('/categories');
               },
-              child: const Text('View All'),
+              child: Text(l10n.viewAll),
             ),
           ],
         ),
@@ -172,7 +177,8 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-    Widget _buildRecommendedSection(BuildContext context, WidgetRef ref) {
+  Widget _buildRecommendedSection(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final recipeAsync = ref.watch(recipeProvider);
     
     return Column(
@@ -181,20 +187,20 @@ class HomeScreen extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Recommended for you',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              l10n.recommendedForYou,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             TextButton(
               onPressed: () {},
-              child: const Text('View All'),
+              child: Text(l10n.viewAll),
             ),
           ],
         ),
         const SizedBox(height: 12),
         recipeAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (err, stack) => Center(child: Text('Error loading recipes')),
+          error: (err, stack) => Center(child: Text(l10n.errorLoadingRecipes)),
           data: (recipes) {
             return GridView.builder(
               shrinkWrap: true,
@@ -282,7 +288,7 @@ class HomeScreen extends ConsumerWidget {
                                     const Icon(Icons.timer, size: 14, color: Colors.white70),
                                     const SizedBox(width: 4),
                                     Text(
-                                      '${recipe.cookingTime} min',
+                                      '${recipe.cookingTime} ${l10n.min}',
                                       style: const TextStyle(color: Colors.white70, fontSize: 12),
                                     ),
                                     const Spacer(),
